@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Book Visa Camp</h1>
+    {% if success %}
+        <div class="success-message">
+            <p>Booking confirmed!</p>
+            <a href="{{ url_for('index') }}" class="back-button">Keep Searching</a>
+        </div>
+    {% else %}
+        <p>Date: {{ camp.date }}</p>
+        <p>City: {{ camp.city }}</p>
+        <p>Visa Country: {{ camp.visa_country }}</p>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <button type="submit" class="submit-button">Book</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
+
+

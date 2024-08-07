@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Visa Camp Booking</h1>
+    <form method="POST" class="search-form">
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city">
+        </div>
+        <div class="form-group">
+            <label for="month">Month (MM):</label>
+            <input type="text" id="month" name="month" placeholder="MM">
+        </div>
+        <div class="form-group">
+            <label for="visa_country">Visa Country:</label>
+            <select id="visa_country" name="visa_country">
+                <option value="">Select Country</option>
+                {% for country in countries %}
+                    <option value="{{ country }}">{{ country }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="search-button">Search</button>
+    </form>
+
+    {% if camps %}
+        <h2>Available Visa Camps</h2>
+        <ul>
+            {% for camp in camps %}
+                <li>
+                    {{ camp.date }} - {{ camp.city }} - {{ camp.visa_country }}
+                    <a href="{{ url_for('book_camp', camp_id=camp.id) }}">Book Now</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No camps found.</p>
+    {% endif %}
+
+    <a href="{{ url_for('agent_login') }}" class="agent-login-button">Agent Login</a>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
